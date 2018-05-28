@@ -1,0 +1,22 @@
+.app-list {
+  float: left;
+  width: 40%;
+  height: 30rem;
+  background: #dbdbdb;
+  .list {
+    max-height: 450px;
+    overflow-y: auto;
+    margin: 1rem;
+    .item {
+      margin: 1rem 0;
+      padding: 0.5rem;
+      color: #555;
+      background: #fff;
+      &:hover {
+        background: #0D98BA;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+}

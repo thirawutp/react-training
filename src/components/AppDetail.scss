@@ -1,0 +1,62 @@
+
+.app-detail {
+  background: #dbdbdb;
+  height: 30rem;
+  float: right;
+  width: 60%;
+  .container {
+    margin: 1rem;
+    border: solid #fff 1px;
+    border-radius: 25px;
+    height: 90%;
+    position: relative;
+    .title {
+      color: #0D98BA;
+      text-align: center;
+      margin: 1rem 0rem;
+      font-size: 1.5rem;
+    }
+    .label-group {
+      color: #fff;
+      margin: 1rem;
+      font-size: 1rem;
+      .label-title {
+        color: #0D98BA;
+      }
+      .text {
+        margin-left: 1rem;
+        color: #555;
+      }
+    }
+    .control-bar {
+      position: absolute;
+      bottom: 0;
+      margin-bottom: 0.5rem;
+      width: 100%;
+      
+      button {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        float: right;
+        cursor: pointer;
+        outline: none;
+        &.delete-btn {
+          color: red;
+          &:hover {
+            color: #fff;
+            background: red;
+          }
+        }
+        &.edit-btn {
+          margin-right: 1rem;
+          color: #0D98BA;
+          &:hover {
+            color: #fff;
+            background: #0D98BA;
+          }
+        }
+      }
+    }
+  }
+}
