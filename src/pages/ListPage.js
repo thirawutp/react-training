@@ -16,9 +16,10 @@ class ListPage extends Component {
     }) || {}
     const appsFiltered = this.props.apps.filter(app => {
       const searchCondition = app.appId.includes(this.props.text)
-      // const filterCondtion = app.status.includes(this.props.filterStatus)
-      return searchCondition
+      const filterCondtion = app.status.includes(this.props.status.toLowerCase())
+      return searchCondition && filterCondtion
     })
+
     return (
       <div>
         <Filter />
@@ -29,6 +30,7 @@ class ListPage extends Component {
         />
         <AppDetail
           selectedApp={selectedApp}
+          router={this.props.router}
           deleteApp={this.props.deleteApp}
         />
       </div>
@@ -41,7 +43,8 @@ const mapStateToProps = (state) => {
   return {
     apps: state.application.apps,
     selectedId: state.application.selectedId,
-    text: state.filter.text
+    text: state.filter.text,
+    status: state.filter.status
   }
 }
 

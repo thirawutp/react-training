@@ -21,7 +21,7 @@ const initState = {
       lastName: '333'
     }
   ],
-  selectedId: -1
+  selectedId: 'aaa-111'
 }
 
 const applicationReducer = (state = initState, action) => {
@@ -48,6 +48,20 @@ const applicationReducer = (state = initState, action) => {
         ...state,
         apps: state.apps.filter(app => {
           return app.appId !== action.payload
+        })
+      }
+
+    case 'UPDATE_FORM':
+      return {
+        ...state,
+        apps: state.apps.map(app => {
+          if (app.appId === action.payload.id) {
+            return {
+              ...app,
+              [action.payload.key]: action.payload.value
+            }
+          }
+          return app
         })
       }
 

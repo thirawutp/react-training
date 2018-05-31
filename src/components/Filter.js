@@ -14,7 +14,10 @@ const Filter = props => {
         props.setSearch(id, value)
       }} />
       <label>Filter</label>
-      <select id='status' onChange={(event) => console.log(event.target.id, event.target.value)}>
+      <select id='status' onChange={(event) => {
+        const { id, value } = event.target
+        props.setSearch(id, value)
+      }}>
         <option>DR</option>
         <option>SM</option>
       </select>
@@ -28,7 +31,7 @@ const Filter = props => {
 const mapStateToProps = null
 
 const mapDispatchToProps = dispatch => ({
-  createApp: dispatch(createApp()),
+  createApp: () => dispatch(createApp()),
   setSearch: (id, value) => dispatch(setSearch(id, value)),
 })
 

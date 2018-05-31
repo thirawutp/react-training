@@ -20,7 +20,6 @@ const LabelGroup = props => {
 const AppDetail = props => {
   const { selectedApp } = props
 
-
   return (
     <div className={styles['app-detail']}>
       {
@@ -37,7 +36,10 @@ const AppDetail = props => {
             })
           }
           <div className={styles['control-bar']}>
-            <button className={styles['edit-btn']}>edit</button>
+            <button
+              className={styles['edit-btn']}
+              onClick={() => props.router.push('/form')}
+            >edit</button>
             <button
               className={styles['delete-btn']}
               onClick={() => props.deleteApp(selectedApp.appId)}

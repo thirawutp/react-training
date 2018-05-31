@@ -2,11 +2,23 @@ import React from 'react'
 import styles from './Form.scss'
 
 export const TextInput = props => {
-  return <input className={styles['form-input']} />
+  const onChange = (event) => {
+    props.onChange(event.target.value)
+  }
+  return <input
+    className={styles['form-input']}
+    type={props.type || 'text'}
+    value={props.value}
+    onChange={onChange}
+    style={props.style} />
 }
 
 export const NumberInput = props => {
-  return <TextInput type='number' />
+  return <TextInput
+    type='number'
+    value={props.value}
+    onChange={props.onChange}
+    style={{ background: 'red' }} />
 }
 
 export const Container = props => {
@@ -28,12 +40,15 @@ export const Footer = props => {
 }
 
 export const Direction = props => {
-  const { direction } = props
+  const { direction, onClick } = props
 
   const style = { float: direction }
   const content = direction === 'left' ? '<' : '>'
 
-  return <div className={styles['footer-direction']} style={style}>
+  return <div
+    className={styles['footer-direction']}
+    onClick={onClick}
+    style={style}>
     {content}
   </div>
 }
