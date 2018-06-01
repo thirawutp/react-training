@@ -5,20 +5,20 @@ const initState = {
     {
       appId: 'aaa-111',
       status: 'dr',
-      firstName: 'aaa',
-      lastName: '111'
+      insured_firstName: 'aaa',
+      insured_lastName: '111'
     },
     {
       appId: 'bbb-222',
       status: 'dr',
-      firstName: 'bbb',
-      lastName: '222'
+      insured_firstName: 'bbb',
+      insured_lastName: '222'
     },
     {
       appId: 'ccc-333',
       status: 'sm',
-      firstName: 'ccc',
-      lastName: '333'
+      insured_firstName: 'ccc',
+      insured_lastName: '333'
     }
   ],
   selectedId: 'aaa-111'

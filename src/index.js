@@ -1,39 +1,24 @@
 // import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
 import App from './App'
 import rootReducer from './reducers'
-const store = createStore(rootReducer)
+import rootSaga from './sagas'
 
-const withCounter = ({ text }) => (Component) => {
-  return class extends React.Component {
-    state = {
-      count: 0
-    }
-  
-    handleCount = () => {
-      this.setState({ count: this.state.count+1 })
-    }
+const sagaMiddleware = createSagaMiddleware()
 
-    render() {
-      return <Component onClick={this.handleCount} count={this.state.count} text={text}/>
-    }
-  }
-}
+const store = createStore(
+  rootReducer,
+  applyMiddleware(sagaMiddleware)
+)
 
-const Button = props => {
-  return <button onClick={props.onClick}>button: {props.count}</button> 
-}
-const Div = props => {
-  return <div onClick={props.onClick}>button: {props.count}</div> 
-}
-
-const withCounterWithHello = withCounter({ text: 'hello' })(Div)
+sagaMiddleware.run(rootSaga)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App/>
+    <App />
   </Provider>
-, document.getElementById('root'))
+  , document.getElementById('root'))

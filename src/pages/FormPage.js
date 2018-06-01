@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import * as Form from '../components/Form/Form'
-import slides from '../config/slides'
+import slidesConfig from '../config/slides'
+import * as Selectors from '../selectors'
 
 import { updateForm } from '../actions/applicationAction'
 
@@ -11,7 +12,7 @@ class FormPage extends React.Component {
   }
 
   nextPage = () => {
-    if (this.state.pageIndex < slides.length) {
+    if (this.state.pageIndex < this.props.slides.length) {
       this.setState({
         pageIndex: this.state.pageIndex + 1
       })
@@ -28,22 +29,34 @@ class FormPage extends React.Component {
 
   renderComponent = (currentSlide) => {
     const { selectedApp, updateForm } = this.props
-    const Element = Form[currentSlide.component] || Form.TextInput
+    // const Element = Form[currentSlide.component] || Form.TextInput
 
     return <Form.QuestionWrapper>
       <Form.Label label={currentSlide.label} />
       <Form.ComponentWrapper>
-        <Element
-          onChange={(value) => updateForm(selectedApp.appId, currentSlide.id, value)}
-          value={selectedApp[currentSlide.id] || ''} />
+        {currentSlide.component.map((c, index) => {
+          const Element = Form[c]
+          const { props = {} } = currentSlide
+          return (
+            <Element
+              key={index}
+              {...props[index]}
+              onChange={(value) => updateForm(
+                selectedApp.appId,
+                currentSlide.id[index],
+                value
+              )}
+              value={selectedApp[currentSlide.id[index]] || ''}
+            />
+          )
+        })}
       </Form.ComponentWrapper>
 
     </Form.QuestionWrapper>
   }
 
   render() {
-    const currentSlide = slides[this.state.pageIndex - 1]
-
+    const currentSlide = this.props.slides[this.state.pageIndex - 1]
     return (
       <Form.Container>
 
@@ -62,11 +75,20 @@ class FormPage extends React.Component {
 }
 
 const mapStateToProps = state => {
+  const selectedApp = state.application.apps.find(app => {
+    return app.appId === state.application.selectedId
+  }) || {}
+
+  const slides = slidesConfig.filter(s => {
+    if (typeof s.condition === 'string') {
+      return Selectors[s.condition](selectedApp)
+    }
+    return s.condition
+  })
+
   return {
-    selectedApp: state.application.apps.find(app => {
-      return app.appId === state.application.selectedId
-    }) || {},
-    // selectedId: state.application.selectedId
+    selectedApp,
+    slides
   }
 }
 

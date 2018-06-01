@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-
+import I18n from '../components/I18n'
 import styles from './AppDetail.scss'
 
 const LabelGroup = props => {
@@ -8,7 +8,7 @@ const LabelGroup = props => {
   return (
     <div className={styles['label-group']}>
       <label className={styles['label-title']}>
-        {label}
+        <I18n>{label}</I18n>
       </label>
       <label className={styles['text']}>
         {value}

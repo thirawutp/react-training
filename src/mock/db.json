@@ -1,0 +1,16 @@
+{
+  "customers": [
+    {
+      "id": "1234567890123",
+      "firstName": "John",
+      "lastName": "Doe",
+      "isAdult": true
+    },
+    {
+      "id": "1111111111119",
+      "firstName": "Foo",
+      "lastName": "Bar",
+      "isAdult": false
+    }
+  ]
+}
